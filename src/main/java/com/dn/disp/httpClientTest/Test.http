@@ -1,0 +1,11 @@
+POST http://localhost:8080/cliente HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Carlos",
+    "lastName": "Gonzalez",
+    "email": "a@gmail.Content-MD5: ",
+    "phone": "9996366333"
+}
+
+
