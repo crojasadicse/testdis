@@ -1,9 +1,7 @@
 package com.dn.disp.models;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -11,20 +9,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "cliente")
-public class ClienteEntity  {
+@Table(name = "ventas")
+public class VentasEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String lastName;
-    private String email;
-    private String phone;
-    
+    private String fecha;
+    private Long cliente;
+
+    @Column(name = "precio_total")
+    private Double precioTotal;
+
+
+
 }
