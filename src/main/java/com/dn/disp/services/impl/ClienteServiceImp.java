@@ -4,27 +4,40 @@ import org.springframework.stereotype.Service;
 
 import com.dn.disp.dto.ClienteCreatedDto;
 import com.dn.disp.models.ClienteEntity;
+import com.dn.disp.repository.IClienteRepository;
 import com.dn.disp.services.IClienteService;
 
+import lombok.AllArgsConstructor;
 
+
+@AllArgsConstructor
 @Service
 public class ClienteServiceImp implements IClienteService {
+
+private final IClienteRepository iClienteRepository;
 
     @Override
     public ClienteCreatedDto create(ClienteCreatedDto entity) {
 
-        ClienteEntity cliente = new ClienteEntity();
-        cliente.setName(entity.getName());
-        cliente.setLastName(entity.getLastName());
-        cliente.setPhone(entity.getPhone() );
-        cliente.setEmail(entity.getEmail());
+
+        ClienteEntity cliente = ClienteEntity.builder()
+                .name(entity.getName())
+                .lastName(entity.getLastName())
+                .phone(entity.getPhone())
+                .email(entity.getEmail())
+                .build();
+
+        // Save the entity
+
+        cliente = iClienteRepository.save(cliente);
 
 
-
-
-
-        return entity;
-        
+        return ClienteCreatedDto.builder()
+                .name(cliente.getName())
+                .lastName(cliente.getLastName())
+                .phone(cliente.getPhone())
+                .email(cliente.getEmail())
+                .build();
 
 
     }
