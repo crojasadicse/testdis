@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dn.disp.dto.ClienteCreatedDto;
+import com.dn.disp.dto.ClienteResponseDto;
+import com.dn.disp.models.ClienteEntity;
 import com.dn.disp.services.IClienteService;
+import com.dn.disp.vo.IClienteVo;
 
 import lombok.AllArgsConstructor;
 
@@ -29,21 +32,30 @@ public class ClienteController {
 
     private final IClienteService iClienteService;
 
+    private final IClienteVo iClienteVo;
+
 
     @PostMapping("")
-    public ResponseEntity<ClienteCreatedDto> create(@RequestBody ClienteCreatedDto clientecCreatedDto ) {
+    public ResponseEntity<ClienteResponseDto> create(@RequestBody ClienteCreatedDto clientecCreatedDto ) {
 
-        ClienteCreatedDto cliente = iClienteService.create(clientecCreatedDto);
+        ClienteEntity clienteEntity = iClienteVo.toEntity(clientecCreatedDto);
 
-        return new ResponseEntity<>(cliente, HttpStatus.CREATED);
+        ClienteEntity cliente = iClienteService.create(  clienteEntity );
+
+        ClienteResponseDto clienteResponseDto = iClienteVo.toClienteResponseDto(cliente);
+
+        return new ResponseEntity<>(clienteResponseDto, HttpStatus.CREATED);
         
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteCreatedDto> get(@PathVariable Integer id) {
-        ClienteCreatedDto cliente = new ClienteCreatedDto();
+    public ResponseEntity<ClienteResponseDto> get(@PathVariable Long id) {
 
-        return new ResponseEntity<>(cliente, HttpStatus.OK);
+        ClienteEntity  cliente = iClienteService.get(id);
+
+        ClienteResponseDto clienteResponseDto = iClienteVo.toClienteResponseDto(cliente);
+
+        return new ResponseEntity<>(clienteResponseDto, HttpStatus.FOUND );
     }
 
     

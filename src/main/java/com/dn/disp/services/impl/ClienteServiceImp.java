@@ -1,8 +1,8 @@
 package com.dn.disp.services.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.dn.disp.dto.ClienteCreatedDto;
 import com.dn.disp.models.ClienteEntity;
 import com.dn.disp.repository.IClienteRepository;
 import com.dn.disp.services.IClienteService;
@@ -12,12 +12,13 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
+@Transactional
 public class ClienteServiceImp implements IClienteService {
 
 private final IClienteRepository iClienteRepository;
 
     @Override
-    public ClienteCreatedDto create(ClienteCreatedDto entity) {
+    public ClienteEntity create(ClienteEntity entity) {
 
 
         ClienteEntity cliente = ClienteEntity.builder()
@@ -27,43 +28,36 @@ private final IClienteRepository iClienteRepository;
                 .email(entity.getEmail())
                 .build();
 
-        // Save the entity
 
         cliente = iClienteRepository.save(cliente);
 
 
-        return ClienteCreatedDto.builder()
-                .name(cliente.getName())
-                .lastName(cliente.getLastName())
-                .phone(cliente.getPhone())
-                .email(cliente.getEmail())
-                .build();
+        return cliente;
 
 
     }
 
     @Override
-    public ClienteCreatedDto update(ClienteCreatedDto entity) {
+    public ClienteEntity update(ClienteEntity entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
-    public void delete(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Long id) {
+        
     }
 
     @Override
-    public ClienteCreatedDto get(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    public ClienteEntity get(Long id) {
+
+         ClienteEntity clienteEntity = iClienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Cliente not found"));
+
+         return clienteEntity;
+
     }
 
-    @Override
-    public String getNomString() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNomString'");
-    }
+
+
 
 }

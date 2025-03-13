@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 
 import com.dn.disp.controller.ClienteController;
 import com.dn.disp.dto.ClienteCreatedDto;
+import com.dn.disp.dto.ClienteResponseDto;
+
 
 
 @SpringBootTest
@@ -25,11 +27,11 @@ class DispApplicationTests {
 
     @Test
     void createCliente_ShouldReturnCreatedAndValidObject() throws Exception {
-        ClienteCreatedDto cliente = new ClienteCreatedDto();
+        ClienteCreatedDto cliente = new ClienteCreatedDto() ;
         cliente.setName("Juan");
         cliente.setLastName("Perez");
         
-        ResponseEntity<ClienteCreatedDto> response = controller.create(cliente);
+        ResponseEntity<ClienteResponseDto> response = controller.create(cliente);
         
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(cliente.getName(), response.getBody().getName());
