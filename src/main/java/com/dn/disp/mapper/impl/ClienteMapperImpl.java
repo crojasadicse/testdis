@@ -8,7 +8,7 @@ import com.dn.disp.models.ClienteEntity;
 import com.dn.disp.mapper.ClienteMapper;
 
 @Component
-public class ClienteServiceImpl implements ClienteMapper {
+public class ClienteMapperImpl implements ClienteMapper {
 
     @Override
     public ClienteEntity toEntity(ClienteCreatedDto clienteCreatedDto) {
