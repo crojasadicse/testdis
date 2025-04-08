@@ -26,8 +26,8 @@ public class ClienteVoImpl implements IClienteVo {
                 .id(clienteEntity.getId())
                 .name(clienteEntity.getName())
                 .lastName(clienteEntity.getLastName())
-                // .email(clienteEntity.getEmail())
-                // .phone(clienteEntity.getPhone())
+                //.email(clienteEntity.getEmail())
+                //.phone(clienteEntity.getPhone())
                 .build();
         
     }

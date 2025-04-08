@@ -7,6 +7,6 @@ import com.dn.disp.models.ClienteEntity;
 
 public interface IClienteService extends ICrudCommons<ClienteEntity, Long> {
 
-    
+    String getDevuelveNombre();
 
 }
