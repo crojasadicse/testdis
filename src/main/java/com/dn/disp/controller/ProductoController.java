@@ -6,7 +6,7 @@ import java.util.List;
 
 
 import com.dn.disp.models.ProductoEntity;
-import com.dn.disp.services.IProductoService;
+import com.dn.disp.services.ProductoService;
 
 
 
@@ -14,9 +14,9 @@ import com.dn.disp.services.IProductoService;
 public class ProductoController {
 
     
-    IProductoService iproductoService;
+    ProductoService iproductoService;
 
-    public ProductoController(IProductoService iproductoService){
+    public ProductoController(ProductoService iproductoService){
         this.iproductoService = iproductoService;
     }
 

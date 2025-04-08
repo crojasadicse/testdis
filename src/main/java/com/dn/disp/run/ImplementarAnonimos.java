@@ -2,7 +2,7 @@ package com.dn.disp.run;
 
 import java.util.List;
 
-import com.dn.disp.InterfaceFunctional.IMath;
+import com.dn.disp.functional.MathOperation;
 import com.dn.disp.models.ProductoEntity;
 
 
@@ -20,7 +20,7 @@ public class ImplementarAnonimos {
         //     }
         // };
 
-        IMath math = (a, b) -> a + b; // Expresión lambda que implementa la interfaz funcional IMath
+        MathOperation math = (a, b) -> a + b; // Expresión lambda que implementa la interfaz funcional IMath
 
         math.operation(5, 10); // Llamada al método operation de la interfaz funcional
 

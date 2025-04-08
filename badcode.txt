@@ -1,0 +1,122 @@
+@startuml
+
+    package com.dn.disp {
+        class DispApplication {
+            +main(String[] args) void
+        }
+    }
+
+    package com.dn.disp.controller {
+        class ClienteController {
+            -IClienteService serv
+            -IClienteVo vo
+            +proc(ClienteCreatedDto) ResponseEntity
+            +g(Long) ResponseEntity
+            +upd(ClienteCreatedDto) ResponseEntity
+            +del(String) ResponseEntity
+        }
+        
+        class ProductoController {
+            -IProductoService srv
+            +list() List~ProductoEntity~
+            +c(ProductoEntity) ResponseEntity
+            +u(ProductoEntity) ProductoEntity
+            +del(String) void
+        }
+    }
+
+    package com.dn.disp.models {
+        class ClienteEntity {
+            -Long id
+            -String name
+            -String lastName
+            -String email
+            -String phone
+        }
+        
+        class ProductoEntity {
+            -String id
+            -String nombre
+            -String descripcion
+            -double precio
+            -int cantidadDisponible
+            -String categoria
+        }
+        
+        class VentasEntity {
+            -Long id
+            -String fecha
+            -Long cliente
+            -Double precioTotal
+        }
+    }
+
+    package com.dn.disp.services {
+        interface IClienteService {
+            +create(ClienteEntity) ClienteEntity
+            +update(ClienteEntity) ClienteEntity
+            +delete(Long) void
+            +get(Long) ClienteEntity
+            +getDevuelveNombre() String
+        }
+        
+        interface IProductoService {
+            +obtenerTodosLosProductos() List~ProductoEntity~
+            +crearProducto() void
+            +actualizarProducto() void
+            +eliminarProducto(String) void
+            +obtenerProductoPorId(String) void
+        }
+        
+        class ClienteServiceImp {
+            -IClienteRepository iClienteRepository
+        }
+        
+        class ProductoServiceImp
+    }
+
+    package com.dn.disp.dto {
+        class ClienteCreatedDto {
+            -String name
+            -String lastName
+            -String email
+            -String phone
+        }
+        
+        class ClienteResponseDto {
+            -Long id
+            -String name
+            -String lastName
+        }
+    }
+
+    package com.dn.disp.repository {
+        interface IClienteRepository {
+            <<CrudRepository>>
+        }
+    }
+
+    package com.dn.disp.vo {
+        interface IClienteVo {
+            +toEntity(ClienteCreatedDto) ClienteEntity
+            +toClienteResponseDto(ClienteEntity) ClienteResponseDto
+        }
+        
+        class ClienteVoImpl {
+            +toEntity(ClienteCreatedDto) ClienteEntity
+            +toClienteResponseDto(ClienteEntity) ClienteResponseDto
+        }
+    }
+
+    ClienteController --> IClienteService
+    ClienteController --> IClienteVo
+    ProductoController --> IProductoService
+    ClienteServiceImp ..|> IClienteService
+    ProductoServiceImp ..|> IProductoService
+    ClienteVoImpl ..|> IClienteVo
+    IClienteService --> ClienteEntity
+    IProductoService --> ProductoEntity
+    ClienteServiceImp --> IClienteRepository
+    IClienteRepository --> ClienteEntity
+
+@enduml
