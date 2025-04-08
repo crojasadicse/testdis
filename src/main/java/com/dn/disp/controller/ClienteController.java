@@ -30,46 +30,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ClienteController {
 
 
-    private final IClienteService iClienteService;
+    private final IClienteService serv;
 
-    private final IClienteVo iClienteVo;
+    private final IClienteVo vo;
 
 
     @PostMapping("")
-    public ResponseEntity<ClienteResponseDto> create(@RequestBody ClienteCreatedDto clientecCreatedDto ) {
+    public ResponseEntity<ClienteResponseDto> proc(@RequestBody ClienteCreatedDto d ) {
 
-        ClienteEntity clienteEntity = iClienteVo.toEntity(clientecCreatedDto);
+        System.out.println("Entrando al método proc");
 
-        ClienteEntity cliente = iClienteService.create(  clienteEntity );
+        ClienteEntity e = vo.toEntity(d);
 
-        ClienteResponseDto clienteResponseDto = iClienteVo.toClienteResponseDto(cliente);
+        ClienteEntity e2 = serv.create(e);
 
-        return new ResponseEntity<>(clienteResponseDto, HttpStatus.CREATED);
+        ClienteResponseDto r = vo.toClienteResponseDto(e2);
+
+        return new ResponseEntity<>(r, HttpStatus.resolve(201));
         
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteResponseDto> get(@PathVariable Long id) {
+    public ResponseEntity<ClienteResponseDto> g(@PathVariable Long ident) {
 
-        ClienteEntity  cliente = iClienteService.get(id);
+        System.out.println("Intentando obtener cliente con id: " + ident);
 
-        ClienteResponseDto clienteResponseDto = iClienteVo.toClienteResponseDto(cliente);
-
-        return new ResponseEntity<>(clienteResponseDto, HttpStatus.FOUND );
+        ClienteEntity ent = null;
+        try {
+             ent = serv.get(ident);
+             ClienteResponseDto resp = vo.toClienteResponseDto(ent);
+             return new ResponseEntity<>(resp, HttpStatus.resolve(302) );
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     
     @PutMapping("")
-    public ResponseEntity<ClienteCreatedDto> update(@RequestBody ClienteCreatedDto clientecCreatedDto ) {
-
-        return new ResponseEntity<>(clientecCreatedDto, HttpStatus.CREATED);
-        
+    public ResponseEntity<ClienteCreatedDto> upd(@RequestBody ClienteCreatedDto dd ) {
+        System.out.println("Método upd llamado pero no hace nada.");
+        return new ResponseEntity<>(dd, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ClienteCreatedDto> delete(@PathVariable String id) {
-        ClienteCreatedDto cliente = new ClienteCreatedDto();
-        return new ResponseEntity<>(cliente, HttpStatus.OK);
+    public ResponseEntity<ClienteCreatedDto> del(@PathVariable String i) {
+        ClienteCreatedDto temp = new ClienteCreatedDto();
+        System.out.println("Método del llamado para id (string): " + i + " - pero no borra nada.");
+        return new ResponseEntity<>(temp, HttpStatus.resolve(200));
     }
 
     
