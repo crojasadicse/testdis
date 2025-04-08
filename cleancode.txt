@@ -1,0 +1,88 @@
+@startuml
+
+    package com.dn.disp {
+        class DispApplication
+    }
+
+    package com.dn.disp.commons {
+        interface CrudOperations~T,ID~
+    }
+
+    package com.dn.disp.controller {
+        class ClienteController
+        class ProductoController
+    }
+
+    package com.dn.disp.dto {
+        class ClienteCreatedDto
+        class ClienteResponseDto
+        class ClienteCreatedTestDto
+    }
+
+    package com.dn.disp.functional {
+        interface MathOperation
+    }
+
+    package com.dn.disp.mapper {
+        interface ClienteMapper
+        class ClienteMapperImpl
+    }
+
+    package com.dn.disp.models {
+        class ClienteEntity {
+        -Long id
+        -String name
+        -String lastName
+        -String email
+        -String phone
+         }
+
+         class ProductoEntity {
+        -String id
+        -String nombre
+        -String descripcion
+        -double precio
+        -int cantidadDisponible
+        -String categoria
+         }
+
+        class VentasEntity {
+        -Long id
+        -String fecha
+        -Long cliente
+        -Double precioTotal
+         }
+    }
+
+    package com.dn.disp.repository {
+        interface ClienteRepository
+    }
+
+    package com.dn.disp.services {
+        interface ClienteService
+        interface ProductoService
+        class ClienteServiceImpl
+        class ProductoServiceImpl
+    }
+
+    package com.dn.disp.run {
+        class ImplementarAnonimos
+    }
+
+    CrudOperations <|.. ClienteService
+    ClienteService <|.. ClienteServiceImpl
+    ProductoService <|.. ProductoServiceImpl
+    ClienteMapper <|.. ClienteMapperImpl
+    CrudRepository <|.. ClienteRepository
+
+    ClienteController --> ClienteService
+    ClienteController --> ClienteMapper
+    ProductoController --> ProductoService
+    ClienteServiceImpl --> ClienteRepository
+    ClienteMapperImpl ..> ClienteCreatedDto
+    ClienteMapperImpl ..> ClienteResponseDto
+    ClienteMapperImpl ..> ClienteEntity
+
+    
+
+@enduml
