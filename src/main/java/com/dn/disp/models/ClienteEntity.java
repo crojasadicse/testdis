@@ -1,9 +1,9 @@
 package com.dn.disp.models;
 
 
-import java.io.Serial;
 
-import jakarta.persistence.Column;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
