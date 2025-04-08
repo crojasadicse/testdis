@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dn.disp.dto.ClienteCreatedDto;
 import com.dn.disp.dto.ClienteResponseDto;
 import com.dn.disp.models.ClienteEntity;
-import com.dn.disp.services.IClienteService;
-import com.dn.disp.vo.IClienteVo;
+import com.dn.disp.services.ClienteService;
+import com.dn.disp.mapper.ClienteMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class ClienteController {
 
 
-    private final IClienteService iClienteService;
+    private final ClienteService iClienteService;
 
-    private final IClienteVo iClienteVo;
+    private final ClienteMapper iClienteVo;
 
 
     @PostMapping("")

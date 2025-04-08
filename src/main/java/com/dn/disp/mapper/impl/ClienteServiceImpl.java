@@ -1,14 +1,14 @@
-package com.dn.disp.vo.impl;
+package com.dn.disp.mapper.impl;
 
 import org.springframework.stereotype.Component;
 
 import com.dn.disp.dto.ClienteCreatedDto;
 import com.dn.disp.dto.ClienteResponseDto;
 import com.dn.disp.models.ClienteEntity;
-import com.dn.disp.vo.IClienteVo;
+import com.dn.disp.mapper.ClienteMapper;
 
 @Component
-public class ClienteVoImpl implements IClienteVo {
+public class ClienteServiceImpl implements ClienteMapper {
 
     @Override
     public ClienteEntity toEntity(ClienteCreatedDto clienteCreatedDto) {

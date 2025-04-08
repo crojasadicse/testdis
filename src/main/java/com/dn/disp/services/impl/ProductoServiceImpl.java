@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.dn.disp.models.ProductoEntity;
-import com.dn.disp.services.IProductoService;
+import com.dn.disp.services.ProductoService;
 
 @Service
-public class ProductoServiceImp implements IProductoService {
+public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public List<ProductoEntity> obtenerTodosLosProductos() {

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dn.disp.models.ClienteEntity;
-import com.dn.disp.repository.IClienteRepository;
-import com.dn.disp.services.IClienteService;
+import com.dn.disp.repository.ClienteRepository;
+import com.dn.disp.services.ClienteService;
 
 import lombok.AllArgsConstructor;
 
@@ -13,9 +13,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 @Transactional
-public class ClienteServiceImp implements IClienteService {
+public class ClienteServiceImpl implements ClienteService {
 
-private final IClienteRepository iClienteRepository;
+private final ClienteRepository iClienteRepository;
 
     @Override
     public ClienteEntity create(ClienteEntity entity) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dn.disp.models.ProductoEntity;
 
-public interface IProductoService {
+public interface ProductoService {
 
     // Aquí puedes agregar los métodos y la lógica para manejar las solicitudes relacionadas con productos.
     // Por ejemplo, métodos para crear, leer, actualizar y eliminar productos.

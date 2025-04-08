@@ -1,7 +1,7 @@
-package com.dn.disp.InterfaceFunctional;
+package com.dn.disp.functional;
 
 @FunctionalInterface
-public interface IMath {
+public interface MathOperation {
 
     Integer operation(Integer a, Integer b);
 

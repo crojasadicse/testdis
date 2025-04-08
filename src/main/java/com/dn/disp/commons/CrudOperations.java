@@ -1,6 +1,6 @@
-package com.dn.disp.commos;
+package com.dn.disp.commons;
 
-public interface ICrudCommons<T, ID> {
+public interface CrudOperations<T, ID> {
 
     public  T create(T entity);
 
